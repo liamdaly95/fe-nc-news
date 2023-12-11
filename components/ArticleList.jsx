@@ -9,7 +9,9 @@ const ArticleList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   useEffect((params) => {
-    getArticles(setArticles)
+    getArticles().then(({data}) => {
+        setArticles(data.articles)
+    })
       .catch(() => {
         setIsError(true);
       })
