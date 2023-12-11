@@ -1,0 +1,22 @@
+.articleCard {
+  border: 2px solid blue;
+  display: flex;
+  flex-direction: row;
+}
+.property {
+  border: 2px solid pink;
+  margin: 0;
+  font-size: smaller;
+}
+
+.topic {
+  border: 2px solid pink;
+  margin: 0;
+  font-size: smaller;
+  font-weight: bold;
+}
+.articleImg {
+  max-width: 30%;
+    max-height: auto;
+    margin-right: 10%;
+}
