@@ -1,0 +1,19 @@
+.singleArticle {
+    text-align: center;
+    border: 2px solid blue;
+  }
+  .property {
+    border: 2px solid pink;
+    margin: 0;
+    font-size: smaller;
+  }
+  
+  .topic {
+    border: 2px solid pink;
+    margin: 0;
+    font-size: smaller;
+  }
+  .articleImg {
+    max-width: 40%;
+      max-height: auto;
+  }
