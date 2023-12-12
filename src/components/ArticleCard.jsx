@@ -3,6 +3,7 @@ import { articleCard, property, articleImg, topic } from "../../css/Articles.mod
 import { convertDate } from "../../utils/utils.js";
 import { updateArticleVote } from "../../utils/api.js";
 import { useState } from "react";
+import ArticleVoteButton from "./ArticleVoteButton.jsx";
 
 const ArticleCard = ({ art }) => {
   const [article, setArticle] = useState(art)
@@ -36,11 +37,7 @@ const ArticleCard = ({ art }) => {
         <p className={topic}>{newTopic}</p>
         <p className={property}>{newDateTime}</p>
         <p className={property}>
-        <button onClick={() => {
-      handleClick(1)
-    }}>⬆</button> {article.votes} <button onClick={() => {
-      handleClick(-1)
-    }}>⬇</button> {isHidden ? null : "Sorry, request failed!"}
+        <ArticleVoteButton inc_votes = {1} article = {article} setArticle={setArticle}/> {article.votes} <ArticleVoteButton inc_votes = {-1} article = {article} setArticle={setArticle}/> {isHidden ? null : "Sorry, request failed!"}
         </p>
         <p className={property}>{article.comment_count} comments</p>
       </span>
