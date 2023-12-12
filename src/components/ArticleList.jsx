@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
-import { articleList } from "../css/ArticleList.module.css";
+import { articleList } from "../../css/Articles.module.css";
 import ArticleCard from "./ArticleCard.jsx";
-import { loading, error } from "../utils/htmlUtils";
-import { getArticles } from "../utils/api";
+import { loading, error } from "../../utils/htmlUtils.jsx";
+import { getArticles } from "../../utils/api.js";
 
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   useEffect(() => {
-    getArticles().then(({data}) => {
-        setArticles(data.articles)
-    })
+    getArticles()
+      .then(({ data }) => {
+        setArticles(data.articles);
+      })
       .catch(() => {
         setIsError(true);
       })
@@ -29,7 +30,7 @@ const ArticleList = () => {
   return (
     <ul className={articleList}>
       {articles.map((article) => {
-        return (<ArticleCard key={article.title} article={article} />);
+        return <ArticleCard key={article.title} article={article} />;
       })}
     </ul>
   );

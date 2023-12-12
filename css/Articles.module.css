@@ -20,3 +20,6 @@
     max-height: auto;
     margin-right: 10%;
 }
+.articleList {
+  border: 2px solid green;
+}

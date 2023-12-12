@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getArticleById } from "../utils/api";
-import { loading, error } from "../utils/htmlUtils";
-import { singleArticle, property, articleImg, topic } from "../css/SingleArticle.module.css";
-import { convertDate } from "../utils/utils";
+import { getArticleById } from "../../utils/api";
+import { loading, error } from "../../utils/htmlUtils";
+import { singleArticle, property, articleImg } from "../../css/SingleArticle.module.css";
+import { convertDate } from "../../utils/utils";
 import VoteButton from "./VoteButton";
+import Comments from "./Comments";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
@@ -46,6 +47,7 @@ const SingleArticle = () => {
           <VoteButton direction="up" /> {article.votes} <VoteButton direction="down" />
         </p>
         <p className={property}>{article.comment_count} comments</p>
+        <Comments article_id = {article.article_id} />
       </article>
     </>
   );
