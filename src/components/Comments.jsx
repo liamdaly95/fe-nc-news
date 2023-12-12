@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { getCommentsByArticle } from "../utils/api";
+import { getCommentsByArticle } from "../../utils/api";
 import CommentCard from "./CommentCard";
-import { commentList } from "../css/Comments.module.css";
-import { error, loading } from "../utils/htmlUtils";
+import { commentList } from "../../css/Comments.module.css";
+import { error, loading } from "../../utils/htmlUtils";
 import Collapsible from "./Collapsible";
 
-const Comments = ({article_id}) => {
+const Comments = ({ article_id }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -28,14 +28,12 @@ const Comments = ({article_id}) => {
     return error();
   }
   return (
-    <Collapsible >
-    <ul className={commentList}>
-      {comments.map((comment) => {
-        return (
-        <CommentCard key={comment.comment_id} comment={comment} />
-        );
-      })}
-    </ul>
+    <Collapsible>
+      <ul className={commentList}>
+        {comments.map((comment) => {
+          return <CommentCard key={comment.comment_id} comment={comment} />;
+        })}
+      </ul>
     </Collapsible>
   );
 };
