@@ -1,8 +1,17 @@
+import { updateArticleVote } from "../utils/api";
+
 const VoteButton = ({direction}) => {
-  if (direction === 'up') {
-    return <button>⬆</button>;
+  const handleClick = (inc_votes) => {
+    updateArticleVote(inc_votes)
   }
-  return <button>⬇</button>;
+  if (direction === 'up') {
+    return <button onClick={() => {
+      handleClick(1)
+    }}>⬆</button>;
+  }
+  return <button onClick={() => {
+    handleClick(-1)
+  }}>⬇</button>;
 };
 
 export default VoteButton;
