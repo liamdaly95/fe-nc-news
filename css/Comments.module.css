@@ -1,7 +1,9 @@
 .commentCard {
-  border: 2px solid blue;
+  border: 2px solid yellow;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  padding: 1%;
+  text-align: left;
 }
 .property {
   border: 2px solid pink;
@@ -9,5 +11,9 @@
   font-size: smaller;
 }
 .commentList {
-  border: 2px solid green;
+  padding: 0px;
+  border: 2px solid brown;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { articleCard, property, articleImg, topic } from "../css/ArticleCard.module.css";
+import { articleCard, property, articleImg, topic } from "../css/Articles.module.css";
 import { convertDate } from "../utils/utils.js";
+import VoteButton from "./VoteButton";
+
 
 const ArticleCard = ({ article }) => {
   const newDateTime = convertDate(article.created_at);
@@ -16,7 +18,7 @@ const ArticleCard = ({ article }) => {
         </Link>
         <p className={topic}>{newTopic}</p>
         <p className={property}>{newDateTime}</p>
-        <p className={property}>⬆ {article.votes} ⬇</p>
+        <p className={property}><VoteButton direction="up"/> {article.votes} <VoteButton direction="down"/></p>
         <p className={property}>{article.comment_count} comments</p>
       </span>
     </div>
