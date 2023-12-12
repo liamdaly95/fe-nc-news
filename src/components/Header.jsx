@@ -1,4 +1,4 @@
-import {nav} from "../css/Header.module.css"
+import {nav} from "../../css/Header.module.css"
 import {Link} from "react-router-dom"
 
 const Header = () => {
