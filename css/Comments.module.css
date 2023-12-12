@@ -1,0 +1,13 @@
+.commentCard {
+  border: 2px solid blue;
+  display: flex;
+  flex-direction: row;
+}
+.property {
+  border: 2px solid pink;
+  margin: 0;
+  font-size: smaller;
+}
+.commentList {
+  border: 2px solid green;
+}
