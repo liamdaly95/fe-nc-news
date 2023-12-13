@@ -5,6 +5,7 @@ import { loading, error } from "../../utils/htmlUtils";
 import { singleArticle, property, articleImg } from "../../css/SingleArticle.module.css";
 import { convertDate } from "../../utils/utils";
 import Comments from "./Comments";
+import ArticleVoteButton from "./ArticleVoteButton";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
@@ -43,7 +44,7 @@ const SingleArticle = () => {
         <p className={property}>{newDateTime}</p>
         <p className={property}>{article.body}</p>
         <p className={property}>
-        <button>⬆</button> {article.votes} <button>⬇</button>
+        <ArticleVoteButton inc_votes = {1} article = {article} setArticle={setArticle}/> {article.votes} <ArticleVoteButton inc_votes = {-1} article = {article} setArticle={setArticle}/>
         </p>
         <p className={property}>{article.comment_count} comments</p>
         <Comments article_id = {article.article_id} />
