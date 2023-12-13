@@ -6,6 +6,7 @@ const AddComment = ({ article_id, setComments }) => {
   const { user } = useContext(UserContext);
   const [body, setBody] = useState("");
   const [bodyError, setBodyError] = useState(false);
+  const [isPosting, setIsPosting] = useState(false)
   const handleChange = (event) => {
     setBody(event.target.value);
   };
@@ -13,28 +14,20 @@ const AddComment = ({ article_id, setComments }) => {
     event.preventDefault();
     if (body.length === 0) {
       setBodyError(true);
-      console.log("comment not posted");
       setTimeout(() => {
         setBodyError(false)
       },3000)
     } else {
       setBody("");
       setBodyError(false)
+      setIsPosting(true)
       postNewComment(user, body, article_id).then(({data}) => {
           setComments((currComments) => {
               return [data.comment, ...currComments]
           })
+          setIsPosting(false)
       })
-      console.log("comment posted");
     }
-    
-    // if (!bodyError) {
-    // } else {
-    //   setTimeout(() => {
-    //     setBodyError(false);
-    //     console.log("comment not posted");
-    //   });
-    // }
   };
   return (
     <>
@@ -43,7 +36,8 @@ const AddComment = ({ article_id, setComments }) => {
           <input type="text" value={body} onChange={handleChange} />
         </label>
         {!bodyError ? null : <p>Please add text</p>}
-        <button>Add comment</button>
+        {!isPosting ? null : <p>Comment is being posted...</p>}
+        <button disabled={isPosting}>Add comment</button>
       </form>
     </>
   );
