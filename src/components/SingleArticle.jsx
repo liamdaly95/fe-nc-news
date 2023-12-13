@@ -12,6 +12,8 @@ const SingleArticle = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [article, setArticle] = useState({});
+  const [isHidden, setIsHidden] = useState(true);
+  const [hasVoted, setHasVoted] = useState(false);
 
   useEffect(() => {
     getArticleById(article_id)
@@ -44,7 +46,24 @@ const SingleArticle = () => {
         <p className={property}>{newDateTime}</p>
         <p className={property}>{article.body}</p>
         <p className={property}>
-        <ArticleVoteButton inc_votes = {1} article = {article} setArticle={setArticle}/> {article.votes} <ArticleVoteButton inc_votes = {-1} article = {article} setArticle={setArticle}/>
+        <ArticleVoteButton
+            inc_votes={1}
+            article={article}
+            setArticle={setArticle}
+            setIsHidden = {setIsHidden}
+            hasVoted = {hasVoted}
+            setHasVoted = {setHasVoted}
+          />{" "}
+          {article.votes}{" "}
+          <ArticleVoteButton
+            inc_votes={-1}
+            article={article}
+            setArticle={setArticle}
+            setIsHidden = {setIsHidden}
+            hasVoted = {hasVoted}
+            setHasVoted = {setHasVoted}
+          />{" "}
+          {isHidden ? null : "Sorry, request failed!"}
         </p>
         <p className={property}>{article.comment_count} comments</p>
         <Comments article_id = {article.article_id} />
