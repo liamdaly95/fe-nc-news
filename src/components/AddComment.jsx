@@ -2,35 +2,40 @@ import { useContext, useState } from "react";
 import { UserContext } from "../context/user";
 import { postNewComment } from "../../utils/api";
 
-const AddComment = ({article_id, setComments}) => {
+const AddComment = ({ article_id, setComments }) => {
   const { user } = useContext(UserContext);
   const [body, setBody] = useState("");
-  const [bodyError, setBodyError] = useState(false)
+  const [bodyError, setBodyError] = useState(false);
   const handleChange = (event) => {
     setBody(event.target.value);
   };
-  const validateInput = (body) => {
-    console.log(body, "<<body");
-    if(body === ""){setBodyError(true) 
-        console.log(bodyError);}
-    else {setBodyError(false) 
-        console.log(bodyError);}
-  }
   const handleSubmit = (event) => {
-    event.preventDefault()
-    validateInput(body)
-    if(!bodyError){
-        setBody("")
-    postNewComment(user, body, article_id).then(({data}) => {
-        setComments((currComments) => {
-            return [data.comment, ...currComments]
-        })
-    })
-    } else {setTimeout(() => {
+    event.preventDefault();
+    if (body.length === 0) {
+      setBodyError(true);
+      console.log("comment not posted");
+      setTimeout(() => {
         setBodyError(false)
-    })}
+      },3000)
+    } else {
+      setBody("");
+      setBodyError(false)
+      postNewComment(user, body, article_id).then(({data}) => {
+          setComments((currComments) => {
+              return [data.comment, ...currComments]
+          })
+      })
+      console.log("comment posted");
+    }
     
-  }
+    // if (!bodyError) {
+    // } else {
+    //   setTimeout(() => {
+    //     setBodyError(false);
+    //     console.log("comment not posted");
+    //   });
+    // }
+  };
   return (
     <>
       <form onSubmit={handleSubmit}>
