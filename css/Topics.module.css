@@ -1,0 +1,17 @@
+.topicList {
+    border: 2px solid blue;
+    /* display: flex;
+    flex-direction: row; */
+  }
+
+.topicCard {
+    border: 2px solid green;
+}
+
+.topicName {
+font-weight: bold;
+}
+
+.topicDesc {
+font-size: small;
+}
