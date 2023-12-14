@@ -33,7 +33,7 @@ const Comments = ({ article_id }) => {
       <AddComment article_id={article_id} setComments={setComments} />
       <ul className={commentList}>
         {comments.map((comment) => {
-          return <CommentCard key={comment.comment_id} comment={comment} />;
+          return <CommentCard key={comment.comment_id} comment={comment} setComments={setComments} />;
         })}
       </ul>
     </Collapsible>
