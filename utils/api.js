@@ -26,6 +26,12 @@ export const postNewComment = (username, body, article_id) => {
 }
 
 
+export const deleteComment = (comment_id) => {
+  return axios.delete(`https://nc-news-z45s.onrender.com/api/comments/${comment_id}`);
+};
+
+
+
 export const getTopics = () => {
   const searchParams = {  };
   return newsApi.get(`/topics`, { params: searchParams });
