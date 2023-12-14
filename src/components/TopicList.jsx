@@ -3,19 +3,19 @@ import { loading, error } from "../../utils/htmlUtils.jsx";
 import { getTopics } from "../../utils/api.js";
 import {topicList, topicCard, topicName, topicDesc} from "../../css/Topics.module.css"
 import {Link} from "react-router-dom"
-
+import Error from "./Error.jsx";
 
 const TopicList = () => {
     const [topics, setTopics] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [isError, setIsError] = useState(false);
+    const [error, setError] = useState(false);
     useEffect(() => {
       getTopics()
         .then(({ data }) => {
           setTopics(data.topics);
         })
-        .catch(() => {
-          setIsError(true);
+        .catch((err) => {
+          setError(err.message);
         })
         .finally(() => {
           setIsLoading(false);
@@ -25,8 +25,8 @@ const TopicList = () => {
     if (isLoading) {
       return loading();
     }
-    if (isError) {
-      return error();
+    if (error) {
+      return <Error message={error}/>;
     }
     return (
       <ul className={topicList}>

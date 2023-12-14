@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { deleteComment } from "../../utils/api";
+import Error from "./Error";
 
 const DeleteCommentButton = ({ comment, setComments }) => {
   const [isDeleting, setIsDeleting] = useState(false)
-  const [requestFailed, setRequestFailed] = useState(false)
+  const [requestFailed, setRequestFailed] = useState()
   const handleClick = () => {
     setIsDeleting(true)
     deleteComment(comment.comment_id).then(() => {
@@ -14,8 +15,8 @@ const DeleteCommentButton = ({ comment, setComments }) => {
             const newComments = currComments.toSpliced(index, 1);
             return newComments;
           })
-    }).catch(() => {
-      setRequestFailed(true)
+    }).catch((err) => {
+      setRequestFailed(err.message)
     }).finally(() => {
       setIsDeleting(false)
       setTimeout(() => {
@@ -27,7 +28,7 @@ const DeleteCommentButton = ({ comment, setComments }) => {
     <>
       <button disabled = {isDeleting} onClick={handleClick}>Delete</button>
       {!isDeleting ? null : <p>Comment is being deleted...</p>}
-      {!requestFailed ? null : <p>Sorry request failed!</p>}
+      {!requestFailed ? null : <Error message ={requestFailed} />}
     </>
   );
 };

@@ -5,18 +5,19 @@ import { commentList } from "../../css/Comments.module.css";
 import { error, loading } from "../../utils/htmlUtils";
 import Collapsible from "./Collapsible";
 import AddComment from "./AddComment";
+import Error from "./Error";
 
 const Comments = ({ article_id }) => {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState(false);
   useEffect(() => {
     getCommentsByArticle(article_id)
       .then(({ data }) => {
         setComments(data.comments);
       })
-      .catch(() => {
-        setIsError(true);
+      .catch((err) => {
+        setError(err.message);
       })
       .finally(() => {
         setIsLoading(false);
@@ -25,8 +26,8 @@ const Comments = ({ article_id }) => {
   if (isLoading) {
     return loading();
   }
-  if (isError) {
-    return error();
+  if (error) {
+    return <Error message={error}/>;
   }
   return (
     <Collapsible>

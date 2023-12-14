@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../context/user";
 import { postNewComment } from "../../utils/api";
+import Error from "../components/Error.jsx"
 
 const AddComment = ({ article_id, setComments }) => {
   const { user } = useContext(UserContext);
@@ -27,7 +28,7 @@ const AddComment = ({ article_id, setComments }) => {
           setComments((currComments) => {
               return [data.comment, ...currComments]
           })
-          
+          setIsPosting(false)
       }).catch(() => {
         setIsPosting(false)
         setRequestFailed(true)
@@ -44,9 +45,9 @@ const AddComment = ({ article_id, setComments }) => {
         <label htmlFor="newComment">
           <input type="text" value={body} onChange={handleChange} />
         </label>
-        {!bodyError ? null : <p>Please add text</p>}
+        {!bodyError ? null : <Error message = {"Please add text"}/>}
         {!isPosting ? null : <p>Comment is being posted...</p>}
-        {!requestFailed ? null : <p>Sorry request failed!</p>}
+        {!requestFailed ? null : <Error message = {"Sorry request failed!"}/>}
         <button disabled={isPosting}>Add comment</button>
       </form>
     </>
