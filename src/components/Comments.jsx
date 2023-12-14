@@ -4,6 +4,7 @@ import CommentCard from "./CommentCard";
 import { commentList } from "../../css/Comments.module.css";
 import { error, loading } from "../../utils/htmlUtils";
 import Collapsible from "./Collapsible";
+import AddComment from "./AddComment";
 
 const Comments = ({ article_id }) => {
   const [comments, setComments] = useState([]);
@@ -29,6 +30,7 @@ const Comments = ({ article_id }) => {
   }
   return (
     <Collapsible>
+      <AddComment article_id={article_id} setComments={setComments} />
       <ul className={commentList}>
         {comments.map((comment) => {
           return <CommentCard key={comment.comment_id} comment={comment} setComments={setComments} />;

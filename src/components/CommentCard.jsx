@@ -1,9 +1,13 @@
 import { convertDate } from "../../utils/utils";
 import { commentCard, property } from "../../css/Comments.module.css";
 import DeleteCommentButton from "./DeleteCommentButton";
+import { useContext } from "react";
+import { UserContext } from "../context/user";
+
 
 const CommentCard = ({ comment, setComments }) => {
-  const user = "grumpy19"
+ const {user} = useContext(UserContext)
+
   
   const newDate = convertDate(comment.created_at);
   return (
