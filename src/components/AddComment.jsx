@@ -7,6 +7,8 @@ const AddComment = ({ article_id, setComments }) => {
   const [body, setBody] = useState("");
   const [bodyError, setBodyError] = useState(false);
   const [isPosting, setIsPosting] = useState(false)
+  const [requestFailed, setRequestFailed] = useState(false)
+
   const handleChange = (event) => {
     setBody(event.target.value);
   };
@@ -25,7 +27,14 @@ const AddComment = ({ article_id, setComments }) => {
           setComments((currComments) => {
               return [data.comment, ...currComments]
           })
-          setIsPosting(false)
+          
+      }).catch(() => {
+        setIsPosting(false)
+        setRequestFailed(true)
+      }).finally(() => {
+        setTimeout(() => {
+        setRequestFailed(false)
+        }, 3000);
       })
     }
   };
@@ -37,6 +46,7 @@ const AddComment = ({ article_id, setComments }) => {
         </label>
         {!bodyError ? null : <p>Please add text</p>}
         {!isPosting ? null : <p>Comment is being posted...</p>}
+        {!requestFailed ? null : <p>Sorry request failed!</p>}
         <button disabled={isPosting}>Add comment</button>
       </form>
     </>
