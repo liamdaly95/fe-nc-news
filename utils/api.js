@@ -4,9 +4,9 @@ const newsApi = axios.create({
   baseURL: "https://nc-news-z45s.onrender.com/api",
 });
 
-export const getArticles = (topic) => {
-  const searchParams = { topic };
-  return newsApi.get(`/articles`, { params: searchParams });
+export const getArticles = (topic, sort_by, order) => {
+  const queryParams = { topic, sort_by, order };
+  return newsApi.get(`/articles`, { params: queryParams });
 };
 
 export const getArticleById = (article_id) => {
@@ -33,6 +33,6 @@ export const deleteComment = (comment_id) => {
 
 
 export const getTopics = () => {
-  const searchParams = {  };
-  return newsApi.get(`/topics`, { params: searchParams });
+  const queryParams = {  };
+  return newsApi.get(`/topics`, { params: queryParams });
 };
