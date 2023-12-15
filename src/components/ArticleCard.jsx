@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { articleCard, property, articleImg, topic } from "../../css/Articles.module.css";
+import { articleCard, property, articleImg, topic, link} from "../../css/Articles.module.css";
 import { convertDate } from "../../utils/utils.js";
 import { useState } from "react";
 import ArticleVoteButton from "./ArticleVoteButton.jsx";
@@ -15,18 +15,23 @@ const ArticleCard = ({ art }) => {
     <div className={articleCard}>
       <img className={articleImg} src={article.article_img_url} />
       <span>
-        <Link to={`/articles/${article.article_id}`}>
+        <Link className={link} to={`/articles/${article.article_id}`}>
           <p className={property}>
             {article.title} by {article.author}
           </p>
         </Link>
-        <p className={topic}>{newTopic}</p>
+        <Link className={link} to={`/topics/${article.topic}`}>
+          <p className={topic}>
+            {newTopic}
+            </p>
+          </Link>
         <p className={property}>{newDateTime}</p>
         <p className={property}>
           <ArticleVoteButton
             inc_votes={1}
-            article={article}
-            setArticle={setArticle}
+            type={"article"}
+            id={article.article_id}
+            setState={setArticle}
             setIsHidden = {setIsHidden}
             hasVoted = {hasVoted}
             setHasVoted = {setHasVoted}
@@ -34,8 +39,9 @@ const ArticleCard = ({ art }) => {
           {article.votes}{" "}
           <ArticleVoteButton
             inc_votes={-1}
-            article={article}
-            setArticle={setArticle}
+            type={"article"}
+            id={article.article_id}
+            setState={setArticle}
             setIsHidden = {setIsHidden}
             hasVoted = {hasVoted}
             setHasVoted = {setHasVoted}

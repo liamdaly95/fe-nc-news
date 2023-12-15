@@ -1,13 +1,13 @@
 import { useState } from "react";
+import {voteButton} from "../../css/Buttons.module.css"
 
-const Collapsible = ({children}) => {
-    const [isHidden, setIsHidden] = useState(false)
+const Collapsible = ({children, setIsCollapsed, isCollapsed}) => {
     const toggleComments = () => {
-        setIsHidden(!isHidden)
+        setIsCollapsed(!isCollapsed)
     }
     return (<div>
-        <button onClick={toggleComments}>{isHidden ? "Show" : "Hide"} comments</button>
-        {isHidden ? null : children}
+        <button className={voteButton} onClick={toggleComments}>{isCollapsed ? "Show" : "Hide"} comments</button>
+        {isCollapsed ? null : children}
     </div>)
 };
 

@@ -1,0 +1,15 @@
+.voteButton {
+    background-color: #28282b;
+  }
+  
+  .voteButton:hover {
+    background-color: #36454f;
+  }
+  
+  .voteButton:disabled,
+  .voteButton[disabled] {
+    background-color: #28282b;
+    opacity: 0.6;
+  }
+
+ 
