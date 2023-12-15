@@ -41,16 +41,17 @@ const SingleArticle = () => {
   return (
     <>
       <article className={singleArticle}>
+        <p>{article.title} by {article.author}</p>
         <img className={articleImg} src={article.article_img_url} />
         <p className={property}>{newTopic}</p>
-        {article.title} by {article.author}
         <p className={property}>{newDateTime}</p>
         <p className={property}>{article.body}</p>
         <p className={property}>
         <ArticleVoteButton
             inc_votes={1}
-            article={article}
-            setArticle={setArticle}
+            type={"article"}
+            id={article.article_id}
+            setState={setArticle}
             setIsHidden = {setIsHidden}
             hasVoted = {hasVoted}
             setHasVoted = {setHasVoted}
@@ -58,8 +59,9 @@ const SingleArticle = () => {
           {article.votes}{" "}
           <ArticleVoteButton
             inc_votes={-1}
-            article={article}
-            setArticle={setArticle}
+            type={"article"}
+            id={article.article_id}
+            setState={setArticle}
             setIsHidden = {setIsHidden}
             hasVoted = {hasVoted}
             setHasVoted = {setHasVoted}

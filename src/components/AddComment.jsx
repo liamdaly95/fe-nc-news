@@ -1,9 +1,11 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../context/user";
 import { postNewComment } from "../../utils/api";
+import {voteButton} from "../../css/Buttons.module.css"
+import {addComment, commentInput} from "../../css/Comments.module.css"
 import Error from "../components/Error.jsx"
 
-const AddComment = ({ article_id, setComments }) => {
+const AddComment = ({ article_id, setComments, setIsCollapsed }) => {
   const { user } = useContext(UserContext);
   const [body, setBody] = useState("");
   const [bodyError, setBodyError] = useState(false);
@@ -29,6 +31,7 @@ const AddComment = ({ article_id, setComments }) => {
               return [data.comment, ...currComments]
           })
           setIsPosting(false)
+          setIsCollapsed(false)
       }).catch(() => {
         setIsPosting(false)
         setRequestFailed(true)
@@ -41,14 +44,16 @@ const AddComment = ({ article_id, setComments }) => {
   };
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="newComment">
-          <input type="text" value={body} onChange={handleChange} />
+      <form onSubmit={handleSubmit} className={addComment}>
+        <label htmlFor="newComment" >
+          <input type="text" value={body} className={commentInput} placeholder="type comment here" onChange={handleChange} />
         </label>
         {!bodyError ? null : <Error message = {"Please add text"}/>}
         {!isPosting ? null : <p>Comment is being posted...</p>}
+        
         {!requestFailed ? null : <Error message = {"Sorry request failed!"}/>}
-        <button disabled={isPosting}>Add comment</button>
+        <button className={voteButton} disabled={isPosting}>Add comment</button>
+        
       </form>
     </>
   );

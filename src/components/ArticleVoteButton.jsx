@@ -1,32 +1,36 @@
-import { updateArticleVote } from "../../utils/api"
+import { updateArticleVote, updateCommentVote } from "../../utils/api";
+import { voteButton } from "../../css/Buttons.module.css";
 
-const ArticleVoteButton = ({inc_votes, article, setArticle, setIsHidden, hasVoted, setHasVoted}) => {
-    const handleClick = (inc_votes) => {
-        updateArticleVote(article.article_id,inc_votes).catch(() => {
-          setArticle((currArticle) => {
-            return {...currArticle, votes: currArticle.votes - inc_votes}
-          })
-          setHasVoted(false)
-          setIsHidden(false)
-          setTimeout(() => {
-          setIsHidden(true)
-          }, 3000)
-        })
-        setHasVoted(true)
-        setArticle((currArticle) => {
-          return {...currArticle, votes: currArticle.votes + inc_votes}
-          
-        })
-        
-      }
+const ArticleVoteButton = ({ inc_votes, setIsHidden, hasVoted, setHasVoted, id, setState, type }) => {
+  const patch = { article: updateArticleVote, comment: updateCommentVote };
+  const handleClick = (inc_votes) => {
+    patch[type](id, inc_votes).catch(() => {
+      setState((currState) => {
+        return { ...currState, votes: currState.votes - inc_votes };
+      });
+      setHasVoted(false);
+      setIsHidden(false);
+      setTimeout(() => {
+        setIsHidden(true);
+      }, 3000);
+    });
+    setHasVoted(true);
+    setState((currState) => {
+      return { ...currState, votes: currState.votes + inc_votes };
+    });
+  };
 
-      return (
-        <button disabled={hasVoted} onClick={() => {
-            handleClick(inc_votes)
-          }}>{inc_votes === 1 ? "⬆" : "⬇"}</button>
-      )
-      
+  return (
+    <button
+      className={voteButton}
+      disabled={hasVoted}
+      onClick={() => {
+        handleClick(inc_votes);
+      }}
+    >
+      {inc_votes === 1 ? "⬆" : "⬇"}
+    </button>
+  );
+};
 
-}
-
-export default ArticleVoteButton
+export default ArticleVoteButton;

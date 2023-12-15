@@ -1,3 +1,4 @@
+import {dropdown} from "../../css/SearchBar.module.css"
 
 const SearchBar = ({ sort, setSort, order, setOrder, setSearchParams }) => {
     
@@ -21,15 +22,19 @@ const SearchBar = ({ sort, setSort, order, setOrder, setSearchParams }) => {
 
   return (
     <>
-      <select value={sort} onChange={handleSortChange}>
+    <label>Sort
+      <select className={dropdown} value={sort} onChange={handleSortChange}>
         <option value="created_at">Date</option>
         <option value="comment_count">Comments</option>
         <option value="votes">Votes</option>
       </select>
-      <select value={order} onChange={handleOrderChange}>
+      </label>
+      <label>by
+      <select className={dropdown} value={order} onChange={handleOrderChange}>
         <option value="DESC">{orderRef[sort].DESC}</option>
         <option value="ASC">{orderRef[sort].ASC}</option>
       </select>
+      </label>
     </>
   );
 };

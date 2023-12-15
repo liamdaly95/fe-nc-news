@@ -1,19 +1,43 @@
 .commentCard {
-  border: 2px solid yellow;
   display: flex;
   flex-direction: column;
   padding: 1%;
   text-align: left;
+  background-color: #36454f;
+  border-radius: 10px;
+  margin: 2.5%;
+}
+
+.commentCard:hover {
+  border-radius: 10px;
+  margin-top: 1.25%;
+  margin-right: 3.75%;
+  margin-left: 1.25%;
+  margin-bottom: 2.5%;
+  box-shadow: 3px 3px 3px 3px lightslategray
 }
 .property {
-  border: 2px solid pink;
+  /* border: 2px solid pink; */
   margin: 0;
   font-size: smaller;
 }
 .commentList {
   padding: 0px;
-  border: 2px solid brown;
+  /* border: 2px solid brown; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.addComment {
+padding: 10px
+}
+
+.commentSection {
+  /* border: 2px solid yellow; */
+}
+
+.commentInput {
+  color: black;
+  margin-right: 5%;
 }

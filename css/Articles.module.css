@@ -1,25 +1,44 @@
 .articleCard {
-  border: 2px solid blue;
   display: flex;
   flex-direction: row;
+  background-color: #36454f;
+  border-radius: 10px;
+  margin: 2.5%;
+  
+}
+.articleCard:hover {
+  /* border: 2px solid blue; */
+  margin-top: 1.25%;
+  margin-right: 3.75%;
+  margin-left: 1.25%;
+  margin-bottom: 2.5%;
+  box-shadow: 3px 3px 3px 3px lightslategray
+  
 }
 .property {
-  border: 2px solid pink;
+  /* border: 2px solid pink; */
   margin: 0;
   font-size: smaller;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
 }
 
 .topic {
-  border: 2px solid pink;
-  margin: 0;
   font-size: smaller;
   font-weight: bold;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
 }
 .articleImg {
   max-width: 30%;
-    max-height: auto;
-    margin-right: 10%;
+  max-height: auto;
+  margin: 2.5%
 }
 .articleList {
-  border: 2px solid green;
+  padding: 0;
 }
+
+.link {
+  text-decoration: none;
+}
+
