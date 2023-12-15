@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { deleteComment } from "../../utils/api";
+import Error from "./Error";
+
 import { voteButton } from "../../css/Buttons.module.css";
 const DeleteCommentButton = ({ comment, setComments }) => {
   const [isDeleting, setIsDeleting] = useState(false);
@@ -16,8 +18,8 @@ const DeleteCommentButton = ({ comment, setComments }) => {
           return newComments;
         });
       })
-      .catch(() => {
-        setRequestFailed(true);
+      .catch((err) => {
+        setRequestFailed(err.message);
       })
       .finally(() => {
         setIsDeleting(false);
@@ -32,7 +34,7 @@ const DeleteCommentButton = ({ comment, setComments }) => {
         Delete
       </button>
       {!isDeleting ? null : <p>Comment is being deleted...</p>}
-      {!requestFailed ? null : <p>Sorry request failed!</p>}
+      {!requestFailed ? null : <Error message ={requestFailed} />}
     </>
   );
 };

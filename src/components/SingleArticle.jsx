@@ -6,11 +6,12 @@ import { singleArticle, property, articleImg } from "../../css/SingleArticle.mod
 import { convertDate } from "../../utils/utils";
 import Comments from "./Comments";
 import ArticleVoteButton from "./ArticleVoteButton";
+import Error from "./Error";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState();
   const [article, setArticle] = useState({});
   const [isHidden, setIsHidden] = useState(true);
   const [hasVoted, setHasVoted] = useState(false);
@@ -20,8 +21,8 @@ const SingleArticle = () => {
       .then(({ data }) => {
         setArticle(data.article);
       })
-      .catch(() => {
-        setIsError(true);
+      .catch((err) => {
+        setError(err.message);
       })
       .finally(() => {
         setIsLoading(false);
@@ -31,8 +32,8 @@ const SingleArticle = () => {
   if (isLoading) {
     return loading();
   }
-  if (isError) {
-    return error();
+  if (error) {
+    return <Error message = {error} />;
   }
   const newDateTime = convertDate(article.created_at);
   const newTopic = `${article.topic.slice(0, 1).toUpperCase()}${article.topic.slice(1)}`;

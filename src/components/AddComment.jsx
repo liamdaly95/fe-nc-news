@@ -3,6 +3,7 @@ import { UserContext } from "../context/user";
 import { postNewComment } from "../../utils/api";
 import {voteButton} from "../../css/Buttons.module.css"
 import {addComment, commentInput} from "../../css/Comments.module.css"
+import Error from "../components/Error.jsx"
 
 const AddComment = ({ article_id, setComments, setIsCollapsed }) => {
   const { user } = useContext(UserContext);
@@ -47,10 +48,12 @@ const AddComment = ({ article_id, setComments, setIsCollapsed }) => {
         <label htmlFor="newComment" >
           <input type="text" value={body} className={commentInput} placeholder="type comment here" onChange={handleChange} />
         </label>
-        {!bodyError ? null : <p>Please add text</p>}
+        {!bodyError ? null : <Error message = {"Please add text"}/>}
         {!isPosting ? null : <p>Comment is being posted...</p>}
-        {!requestFailed ? null : <p>Sorry request failed!</p>}
+        
+        {!requestFailed ? null : <Error message = {"Sorry request failed!"}/>}
         <button className={voteButton} disabled={isPosting}>Add comment</button>
+        
       </form>
     </>
   );

@@ -3,6 +3,7 @@ import { articleCard, property, articleImg, topic, link} from "../../css/Article
 import { convertDate } from "../../utils/utils.js";
 import { useState } from "react";
 import ArticleVoteButton from "./ArticleVoteButton.jsx";
+import Error from "./Error.jsx";
 
 const ArticleCard = ({ art }) => {
   const [article, setArticle] = useState(art);
@@ -46,7 +47,7 @@ const ArticleCard = ({ art }) => {
             hasVoted = {hasVoted}
             setHasVoted = {setHasVoted}
           />{" "}
-          {isHidden ? null : "Sorry, request failed!"}
+          {isHidden ? null : <Error message = {"Sorry, request failed!"} />}
         </p>
         <p className={property}>{article.comment_count} comments</p>
       </span>
