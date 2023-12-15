@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { loading, error } from "../../utils/htmlUtils.jsx";
 import { getTopics } from "../../utils/api.js";
-import {topicList, topicCard, topicName, topicDesc} from "../../css/Topics.module.css"
+import {topicList, topicCard, topicName, topicDesc, topicLink} from "../../css/Topics.module.css"
 import {Link} from "react-router-dom"
 
 
@@ -32,7 +32,7 @@ const TopicList = () => {
       <ul className={topicList}>
         {topics.map((topic) => {
             const newTopic = `${topic.slug.slice(0, 1).toUpperCase()}${topic.slug.slice(1)}`;
-          return (<div className={topicCard} key={newTopic}><Link to={`/topics/${topic.slug}`}>
+          return (<div className={topicCard} key={newTopic}><Link className={topicLink} to={`/topics/${topic.slug}`}>
           <p className={topicName}>{newTopic}</p>
           <p className={topicDesc}>{topic.description}</p>
           </Link></div>);
