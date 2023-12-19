@@ -12,6 +12,7 @@ function App() {
     <>
       <Header></Header>
       <Routes>
+      <Route path="/" element={<ArticleList />} />
         <Route path="/articles" element={<ArticleList />} />
         <Route path="/topics" element={<TopicList />} />
         <Route path="/articles/:article_id" element={<SingleArticle />} />
